@@ -6,6 +6,17 @@ import AddDrawer from "./AddDrawer";
 
 const App: FC = () => {
   const [showDrawer, setShowDrawer] = useState(false);
+  const [values, setValues] = useState({});
+  const [errorInfo, setErrorInfo] = useState({});
+
+  const handleAddFormOnFinish = (values) => {
+    setValues(values)
+    console.log("values: ", values)
+    console.log("errorInfo: ", errorInfo)
+  }
+  const handleAddFormOnFinishFailed = (errorInfo) => {
+    setErrorInfo(errorInfo)
+  }
   return (
     <Fragment>
       <Button
@@ -16,7 +27,9 @@ const App: FC = () => {
       >
         Button
       </Button>
-      <AddDrawer show={showDrawer} handleOnClose={() => setShowDrawer(false)} />
+      <AddDrawer show={showDrawer} handleOnClose={() => setShowDrawer(false)}
+        handleOnFinish={handleAddFormOnFinish}
+        handleOnFinishFailed={ handleAddFormOnFinishFailed}/>
     </Fragment>
   );
 };
